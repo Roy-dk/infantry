@@ -253,7 +253,7 @@ void chassis_behaviour_mode_set(chassis_move_t *chassis_move_mode)
     }
     else if (switch_is_up(chassis_move_mode->chassis_RC->rc.s[CHASSIS_MODE_CHANNEL]))
     {
-        chassis_behaviour_mode = CHASSIS_INFANTRY_FOLLOW_GIMBAL_YAW;
+        chassis_behaviour_mode = CHASSIS_INFANTRY_FOLLOW_GIMBAL_YAW;//00000000000000000
     }
 
     //when gimbal in some mode, such as init mode, chassis must's move
