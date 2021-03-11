@@ -193,19 +193,19 @@ typedef struct
     gimbal_motor_mode_e gimbal_motor_mode;
     gimbal_motor_mode_e last_gimbal_motor_mode;
     uint16_t offset_ecd;
-    fp32 max_relative_angle; //最大相对角度 校准模式下设置
-    fp32 min_relative_angle; //最小相对角度 校准模式下设置
+    fp32 max_relative_angle; //rad
+    fp32 min_relative_angle; //rad
 
-    fp32 relative_angle;     //当前相对角度（电机上编码器）
-    fp32 relative_angle_set; //目标相对角度（电机上编码器）
-    fp32 absolute_angle;     //当前绝对角度（电机上编码器）
-    fp32 absolute_angle_set; //目标绝对角度（电机上编码器）
-    fp32 motor_gyro;         //当前角速度
-    fp32 motor_gyro_set;     //目标角速度
-    fp32 motor_speed;       
+    fp32 relative_angle;     //rad
+    fp32 relative_angle_set; //rad
+    fp32 absolute_angle;     //rad
+    fp32 absolute_angle_set; //rad
+    fp32 motor_gyro;         //rad/s
+    fp32 motor_gyro_set;
+    fp32 motor_speed;
     fp32 raw_cmd_current;
-    fp32 current_set;       //目标电流
-    int16_t given_current;  //给予的电流
+    fp32 current_set;
+    int16_t given_current;
 
 } gimbal_motor_t;
 
@@ -225,8 +225,8 @@ typedef struct
 typedef struct
 {
     const RC_ctrl_t *gimbal_rc_ctrl;
-    const fp32 *gimbal_INT_angle_point;//中断更新
-    const fp32 *gimbal_INT_gyro_point;//中断更新
+    const fp32 *gimbal_INT_angle_point;
+    const fp32 *gimbal_INT_gyro_point;
     gimbal_motor_t gimbal_yaw_motor;
     gimbal_motor_t gimbal_pitch_motor;
     gimbal_step_cali_t gimbal_cali;

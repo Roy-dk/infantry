@@ -185,8 +185,6 @@ typedef struct
 
 } chassis_move_t;
 
-extern fp32 current_total;
-
 /**
   * @brief          chassis task, osDelay CHASSIS_CONTROL_TIME_MS (2ms) 
   * @param[in]      pvParameters: null

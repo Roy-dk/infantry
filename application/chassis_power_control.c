@@ -44,7 +44,6 @@
   */
 void chassis_power_control(chassis_move_t *chassis_power_control)
 {
-    /*
     fp32 chassis_power = 0.0f;
     fp32 chassis_power_buffer = 0.0f;
     fp32 total_current_limit = 0.0f;
@@ -113,12 +112,10 @@ void chassis_power_control(chassis_move_t *chassis_power_control)
                 total_current_limit = BUFFER_TOTAL_CURRENT_LIMIT + POWER_TOTAL_CURRENT_LIMIT;
             }
         }
-    }*/
+    }
 
     
-    fp32 total_current = 0.0f;
-    fp32 total_current_limit = 200.0 / 22.4 / 20.0 * 16384.0;
-
+    total_current = 0.0f;
     //calculate the original motor current set
     //计算原本电机电流设定
     for(uint8_t i = 0; i < 4; i++)

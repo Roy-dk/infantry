@@ -62,17 +62,7 @@
   */
 
 /* USER CODE BEGIN EXPORTED_TYPES */
-typedef struct
-{
-  int16_t center_x; // 装甲板中心 x 座标 [0,32767] (-1未检测到)
-  int16_t center_y;
-  int16_t t_x; // 装甲板的位置向量 (x=right,y=down,z=forward)
-  int16_t t_y;
-  int16_t t_z;
-  int16_t r_x; // 装甲板的旋转向量
-  int16_t r_y;
-  int16_t r_z;
-} JetsonRecvData;
+
 /* USER CODE END EXPORTED_TYPES */
 
 /**
@@ -116,7 +106,7 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 
 /* USER CODE BEGIN EXPORTED_FUNCTIONS */
-JetsonRecvData get_latest_recv_data(void);
+
 /* USER CODE END EXPORTED_FUNCTIONS */
 
 /**
