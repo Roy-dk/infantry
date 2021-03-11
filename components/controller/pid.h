@@ -53,7 +53,6 @@ typedef struct
   * @param[in]      PID: 0: kp, 1: ki, 2:kd
   * @param[in]      max_out: pid max out
   * @param[in]      max_iout: pid max iout
-  * @retval         none
   */
 /**
   * @brief          pid struct data init
@@ -63,7 +62,6 @@ typedef struct
   * @param[in]      PID: 0: kp, 1: ki, 2:kd
   * @param[in]      max_out: pid最大输出
   * @param[in]      max_iout: pid最大积分输出
-  * @retval         none
   */
 extern void PID_init(pid_type_def *pid, uint8_t mode, const fp32 PID[3], fp32 max_out, fp32 max_iout);
 
@@ -86,12 +84,10 @@ extern fp32 PID_calc(pid_type_def *pid, fp32 ref, fp32 set);
 /**
   * @brief          pid out clear
   * @param[out]     pid: PID struct data point
-  * @retval         none
   */
 /**
   * @brief          pid 输出清除
   * @param[out]     pid: PID结构数据指针
-  * @retval         none
   */
 extern void PID_clear(pid_type_def *pid);
 

@@ -129,13 +129,11 @@ uint32_t verify_CRC8_check_sum(unsigned char *pch_message, unsigned int dw_lengt
   * @brief          append CRC8 to the end of data
   * @param[in]      pch_message: data
   * @param[in]      dw_length:stream length = data + checksum
-  * @retval         none
   */
 /**
   * @brief          添加CRC8到数据的结尾
   * @param[in]      pch_message: 数据
   * @param[in]      dw_length: 数据和校验的长度
-  * @retval         none
   */
 void append_CRC8_check_sum(unsigned char *pch_message, unsigned int dw_length)
 {
@@ -207,13 +205,11 @@ uint32_t verify_CRC16_check_sum(uint8_t *pchMessage, uint32_t dwLength)
   * @brief          append CRC16 to the end of data
   * @param[in]      pch_message: data
   * @param[in]      dw_length:stream length = data + checksum
-  * @retval         none
   */
 /**
   * @brief          添加CRC16到数据的结尾
   * @param[in]      pch_message: 数据
   * @param[in]      dw_length: 数据和校验的长度
-  * @retval         none
   */
 void append_CRC16_check_sum(uint8_t * pchMessage,uint32_t dwLength)
 {

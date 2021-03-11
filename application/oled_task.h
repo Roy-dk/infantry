@@ -23,12 +23,10 @@
 /**
   * @brief          oled task
   * @param[in]      pvParameters: NULL
-  * @retval         none
   */
 /**
   * @brief          oledÈÎÎñ
   * @param[in]      pvParameters: NULL
-  * @retval         none
   */
 extern void oled_task(void const * argument);
 

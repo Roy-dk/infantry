@@ -7,29 +7,29 @@
 
 typedef enum
 {
-    RED_HERO        = 1,
-    RED_ENGINEER    = 2,
-    RED_STANDARD_1  = 3,
-    RED_STANDARD_2  = 4,
-    RED_STANDARD_3  = 5,
-    RED_AERIAL      = 6,
-    RED_SENTRY      = 7,
-    BLUE_HERO       = 11,
-    BLUE_ENGINEER   = 12,
+    RED_HERO = 1,
+    RED_ENGINEER = 2,
+    RED_STANDARD_1 = 3,
+    RED_STANDARD_2 = 4,
+    RED_STANDARD_3 = 5,
+    RED_AERIAL = 6,
+    RED_SENTRY = 7,
+    BLUE_HERO = 11,
+    BLUE_ENGINEER = 12,
     BLUE_STANDARD_1 = 13,
     BLUE_STANDARD_2 = 14,
     BLUE_STANDARD_3 = 15,
-    BLUE_AERIAL     = 16,
-    BLUE_SENTRY     = 17,
+    BLUE_AERIAL = 16,
+    BLUE_SENTRY = 17,
 } robot_id_t;
 typedef enum
 {
-    PROGRESS_UNSTART        = 0,
-    PROGRESS_PREPARE        = 1,
-    PROGRESS_SELFCHECK      = 2,
-    PROGRESS_5sCOUNTDOWN    = 3,
-    PROGRESS_BATTLE         = 4,
-    PROGRESS_CALCULATING    = 5,
+    PROGRESS_UNSTART = 0,
+    PROGRESS_PREPARE = 1,
+    PROGRESS_SELFCHECK = 2,
+    PROGRESS_5sCOUNTDOWN = 3,
+    PROGRESS_BATTLE = 4,
+    PROGRESS_CALCULATING = 5,
 } game_progress_t;
 typedef __packed struct //0001
 {
@@ -71,7 +71,6 @@ typedef __packed struct //0x0102
     uint8_t supply_projectile_step;
     uint8_t supply_projectile_num;
 } ext_supply_projectile_action_t;
-
 
 typedef __packed struct //0x0103
 {
@@ -162,7 +161,6 @@ typedef __packed struct
     uint8_t data4;
 } custom_data_t;
 
-
 typedef __packed struct
 {
     uint8_t data[64];
@@ -172,8 +170,6 @@ typedef __packed struct
 {
     uint8_t data[32];
 } ext_download_stream_data_t;
-
-
 
 extern void init_referee_struct_data(void);
 extern void referee_data_solve(uint8_t *frame);

@@ -1,59 +1,11 @@
 /**
   ****************************(C) COPYRIGHT 2019 DJI****************************
   * @file       calibrate_task.c/h
-  * @brief      calibrate these device，include gimbal, gyro, accel, magnetometer,
-  *             chassis. gimbal calibration is to calc the midpoint, max/min 
-  *             relative angle. gyro calibration is to calc the zero drift.
-  *             accel and mag calibration have not been implemented yet, because
-  *             accel is not necessary to calibrate, mag is not used. chassis 
-  *             calibration is to make motor 3508 enter quick reset ID mode.
   *             校准设备，包括云台,陀螺仪,加速度计,磁力计,底盘.云台校准是主要计算零点
   *             和最大最小相对角度.云台校准是主要计算零漂.加速度计和磁力计校准还没有实现
   *             因为加速度计还没有必要去校准,而磁力计还没有用.底盘校准是使M3508进入快速
   *             设置ID模式.
-  * @note       
-  * @history
-  *  Version    Date            Author          Modification
-  *  V1.0.0     Oct-25-2018     RM              1. done
-  *  V1.1.0     Nov-11-2019     RM              1. add chassis clabration
-  *
-  @verbatim
-  ==============================================================================
-  *             use the remote control begin calibrate,
-  *             first: two switchs of remote control are down
-  *             second:hold for 2 seconds, two rockers set to V, like \../;  \. means the letf rocker go bottom right.
-  *             third:hold for 2 seconds, two rockers set to ./\., begin the gyro calibration
-  *                     or set to '\/', begin the gimbal calibration
-  *                     or set to /''\, begin the chassis calibration
-  *
-  *             data in flash, include cali data and name[3] and cali_flag
-  *             for example, head_cali has 8 bytes, and it need 12 bytes in flash. if it starts in 0x080A0000
-  *             0x080A0000-0x080A0007: head_cali data
-  *             0x080A0008: name[0]
-  *             0x080A0009: name[1]
-  *             0x080A000A: name[2]
-  *             0x080A000B: cali_flag, when cali_flag == 0x55, means head_cali has been calibrated.
-  *             if add a sensor
-  *             1.add cail sensro name in cali_id_e at calibrate_task.h, like
-  *             typedef enum
-  *             {
-  *                 ...
-  *                 //add more...
-  *                 CALI_XXX,
-  *                 CALI_LIST_LENGHT,
-  *             } cali_id_e;
-  *             2. add the new data struct in calibrate_task.h, must be 4 four-byte mulitple  like
-  *
-  *             typedef struct
-  *             {
-  *                 uint16_t xxx;
-  *                 uint16_t yyy;
-  *                 fp32 zzz;
-  *             } xxx_cali_t; //size: 8 bytes, must be 4, 8, 12, 16...
-  *             3.in "FLASH_WRITE_BUF_LENGHT", add "sizeof(xxx_cali_t)", and implement new function.
-  *             bool_t cali_xxx_hook(uint32_t *cali, bool_t cmd), and add the name in "cali_name[CALI_LIST_LENGHT][3]"
-  *             and declare variable xxx_cali_t xxx_cail, add the data address in cali_sensor_buf[CALI_LIST_LENGHT]
-  *             and add the data lenght in cali_sensor_size, at last, add function in cali_hook_fun[CALI_LIST_LENGHT]
+
   *             使用遥控器进行开始校准
   *             第一步:遥控器的两个开关都打到下
   *             第二步:两个摇杆打成\../,保存两秒.\.代表左摇杆向右下打.
@@ -89,10 +41,6 @@
   *             bool_t cali_xxx_hook(uint32_t *cali, bool_t cmd), 添加新名字在 "cali_name[CALI_LIST_LENGHT][3]"
   *             和申明变量 xxx_cali_t xxx_cail, 添加变量地址在cali_sensor_buf[CALI_LIST_LENGHT]
   *             在cali_sensor_size[CALI_LIST_LENGHT]添加数据长度, 最后在cali_hook_fun[CALI_LIST_LENGHT]添加函数
-  *
-  ==============================================================================
-  @endverbatim
-  ****************************(C) COPYRIGHT 2019 DJI****************************
   */
 
 
@@ -216,12 +164,10 @@ typedef struct
 /**
   * @brief          use remote control to begin a calibrate,such as gyro, gimbal, chassis
   * @param[in]      none
-  * @retval         none
   */
 /**
   * @brief          使用遥控器开始校准，例如陀螺仪，云台，底盘
   * @param[in]      none
-  * @retval         none
   */
 extern void cali_param_init(void);
 /**
@@ -239,24 +185,20 @@ extern int8_t get_control_temperature(void);
 /**
   * @brief          get latitude, default 22.0f
   * @param[out]     latitude: the point to fp32 
-  * @retval         none
   */
 /**
   * @brief          获取纬度,默认22.0f
   * @param[out]     latitude:fp32指针 
-  * @retval         none
   */
 extern void get_flash_latitude(float *latitude);
 
 /**
   * @brief          calibrate task, created by main function
   * @param[in]      pvParameters: null
-  * @retval         none
   */
 /**
   * @brief          校准任务，由main函数创建
   * @param[in]      pvParameters: 空
-  * @retval         none
   */
 extern void calibrate_task(void const *pvParameters);
 

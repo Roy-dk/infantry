@@ -2,17 +2,6 @@
   ****************************(C) COPYRIGHT 2019 DJI****************************
   * @file       referee_usart_task.c/h
   * @brief      RM referee system data solve. RM裁判系统数据处理
-  * @note       
-  * @history
-  *  Version    Date            Author          Modification
-  *  V1.0.0     Nov-11-2019     RM              1. done
-  *
-  @verbatim
-  ==============================================================================
-
-  ==============================================================================
-  @endverbatim
-  ****************************(C) COPYRIGHT 2019 DJI****************************
   */
 #include "referee_usart_task.h"
 #include "main.h"
@@ -28,16 +17,10 @@
 
 
 
-
-/**
-  * @brief          single byte upacked 
-  * @param[in]      void
-  * @retval         none
-  */
 /**
   * @brief          单字节解包
   * @param[in]      void
-  * @retval         none
+
   */
 static void referee_unpack_fifo_data(void);
 
@@ -50,15 +33,11 @@ fifo_s_t referee_fifo;
 uint8_t referee_fifo_buf[REFEREE_FIFO_BUF_LENGTH];
 unpack_data_t referee_unpack_obj;
 
-/**
-  * @brief          referee task
-  * @param[in]      pvParameters: NULL
-  * @retval         none
-  */
+
 /**
   * @brief          裁判系统任务
   * @param[in]      pvParameters: NULL
-  * @retval         none
+
   */
 void referee_usart_task(void const * argument)
 {
@@ -75,15 +54,11 @@ void referee_usart_task(void const * argument)
 }
 
 
-/**
-  * @brief          single byte upacked 
-  * @param[in]      void
-  * @retval         none
-  */
+
 /**
   * @brief          单字节解包
   * @param[in]      void
-  * @retval         none
+
   */
 void referee_unpack_fifo_data(void)
 {

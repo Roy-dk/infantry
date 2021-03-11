@@ -1,20 +1,5 @@
 /**
-  ****************************(C) COPYRIGHT 2019 DJI****************************
-  * @file       chassis.c/h
-  * @brief      chassis control task,
   *             底盘控制任务
-  * @note       
-  * @history
-  *  Version    Date            Author          Modification
-  *  V1.0.0     Dec-26-2018     RM              1. 完成
-  *  V1.1.0     Nov-11-2019     RM              1. add chassis power control
-  *
-  @verbatim
-  ==============================================================================
-
-  ==============================================================================
-  @endverbatim
-  ****************************(C) COPYRIGHT 2019 DJI****************************
   */
 #ifndef CHASSIS_TASK_H
 #define CHASSIS_TASK_H
@@ -185,33 +170,20 @@ typedef struct
 
 } chassis_move_t;
 
-/**
-  * @brief          chassis task, osDelay CHASSIS_CONTROL_TIME_MS (2ms) 
-  * @param[in]      pvParameters: null
-  * @retval         none
-  */
+
 /**
   * @brief          底盘任务，间隔 CHASSIS_CONTROL_TIME_MS 2ms
   * @param[in]      pvParameters: 空
-  * @retval         none
   */
 extern void chassis_task(void const *pvParameters);
 
-/**
-  * @brief          accroding to the channel value of remote control, calculate chassis vertical and horizontal speed set-point
-  *                 
-  * @param[out]     vx_set: vertical speed set-point
-  * @param[out]     vy_set: horizontal speed set-point
-  * @param[out]     chassis_move_rc_to_vector: "chassis_move" valiable point
-  * @retval         none
-  */
+
 /**
   * @brief          根据遥控器通道值，计算纵向和横移速度
   *                 
   * @param[out]     vx_set: 纵向速度指针
   * @param[out]     vy_set: 横向速度指针
   * @param[out]     chassis_move_rc_to_vector: "chassis_move" 变量指针
-  * @retval         none
   */
 extern void chassis_rc_to_control_vector(fp32 *vx_set, fp32 *vy_set, chassis_move_t *chassis_move_rc_to_vector);
 

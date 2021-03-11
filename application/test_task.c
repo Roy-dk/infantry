@@ -30,12 +30,10 @@ const error_t *error_list_test_local;
 /**
   * @brief          test task
   * @param[in]      pvParameters: NULL
-  * @retval         none
   */
 /**
   * @brief          test任务
   * @param[in]      pvParameters: NULL
-  * @retval         none
   */
 void test_task(void const * argument)
 {
@@ -78,14 +76,8 @@ void test_task(void const * argument)
 
 
 /**
-  * @brief          make the buzzer sound
-  * @param[in]      num: the number of beeps 
-  * @retval         none
-  */
-/**
   * @brief          使得蜂鸣器响
   * @param[in]      num:响声次数
-  * @retval         none
   */
 static void buzzer_warn_error(uint8_t num)
 {

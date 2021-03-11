@@ -38,13 +38,11 @@
   * @brief          erase flash
   * @param[in]      address: flash address
   * @param[in]      len: page num
-  * @retval         none
   */
 /**
   * @brief          擦除flash
   * @param[in]      address: flash 地址
   * @param[in]      len: 页数量
-  * @retval         none
   */
 extern void flash_erase_address(uint32_t address, uint16_t len);
 
@@ -88,14 +86,12 @@ extern int8_t flash_write_muli_address(uint32_t start_address, uint32_t end_addr
   * @param[in]      address: flash address
   * @param[out]     buf: data point
   * @param[in]      len: data num
-  * @retval         none
   */
 /**
   * @brief          从flash读数据
   * @param[in]      start_address: flash 地址
   * @param[out]     buf: 数据指针
   * @param[in]      len: 数据长度
-  * @retval         none
   */
 extern void flash_read(uint32_t address, uint32_t *buf, uint32_t len);
 
