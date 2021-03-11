@@ -954,6 +954,7 @@ static void gimbal_relative_angle_limit(gimbal_motor_t *gimbal_motor, fp32 add)
   */
 static void gimbal_control_loop(gimbal_control_t *control_loop)
 {
+<<<<<<< HEAD
     if (control_loop == NULL)
     {
         return;
@@ -984,6 +985,39 @@ static void gimbal_control_loop(gimbal_control_t *control_loop)
     {
         gimbal_motor_relative_angle_control(&control_loop->gimbal_pitch_motor,1);
     }
+=======
+  if (control_loop == NULL)
+  {
+    return;
+  }
+  /*PID+设置电流*/
+  if (control_loop->gimbal_yaw_motor.gimbal_motor_mode == GIMBAL_MOTOR_RAW)
+  {
+    /*直接设置电流*/
+    gimbal_motor_raw_angle_control(&control_loop->gimbal_yaw_motor);
+  }
+  else if (control_loop->gimbal_yaw_motor.gimbal_motor_mode == GIMBAL_MOTOR_GYRO)
+  {
+    gimbal_motor_absolute_angle_control(&control_loop->gimbal_yaw_motor,0);
+  }
+  else if (control_loop->gimbal_yaw_motor.gimbal_motor_mode == GIMBAL_MOTOR_ENCONDE)
+  {
+    gimbal_motor_relative_angle_control(&control_loop->gimbal_yaw_motor ,0);
+  }
+
+  if (control_loop->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_RAW)
+  {
+    gimbal_motor_raw_angle_control(&control_loop->gimbal_pitch_motor);
+  }
+  else if (control_loop->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_GYRO)
+  {
+    gimbal_motor_absolute_angle_control(&control_loop->gimbal_pitch_motor,1);
+  }
+  else if (control_loop->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_ENCONDE)
+  {
+    gimbal_motor_relative_angle_control(&control_loop->gimbal_pitch_motor,1);
+  }
+>>>>>>> 2ff7c1d7f978d2c422e3d53d2a4fd67f51449b21
 }
 
 /**
@@ -1030,7 +1064,6 @@ static void gimbal_motor_relative_angle_control(gimbal_motor_t *gimbal_motor,int
     //控制值赋值
     gimbal_motor->given_current = (int16_t)(gimbal_motor->current_set);
 }
-
 /**
   * @brief          gimbal control mode :GIMBAL_MOTOR_RAW, current  is sent to CAN bus. 
   * @param[out]     gimbal_motor: yaw motor or pitch motor
