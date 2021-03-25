@@ -111,7 +111,7 @@ static void gimbal_motor_raw_angle_control(gimbal_motor_t *gimbal_motor);
   * @brief          在GIMBAL_MOTOR_GYRO模式，限制角度设定,防止超过最大
   * @param[out]     gimbal_motor:yaw电机或者pitch电机
   */
-static void gimbal_absolute_angle_limit(gimbal_motor_t *gimbal_motor, fp32 add);
+static void gimbal_absolute_angle_limit(gimbal_motor_t *gimbal_motor, fp32 add,int type);
 
 /**
   * @brief          在GIMBAL_MOTOR_ENCONDE模式，限制角度设定,防止超过最大
@@ -625,7 +625,7 @@ static void gimbal_set_control(gimbal_control_t *set_control)
   else if (set_control->gimbal_yaw_motor.gimbal_motor_mode == GIMBAL_MOTOR_GYRO)
   {
     //gyro模式下，陀螺仪角度控制
-    gimbal_absolute_angle_limit(&set_control->gimbal_yaw_motor, add_yaw_angle);
+    gimbal_absolute_angle_limit(&set_control->gimbal_yaw_motor, add_yaw_angle,1);
   }
   else if (set_control->gimbal_yaw_motor.gimbal_motor_mode == GIMBAL_MOTOR_ENCONDE)
   {
@@ -642,7 +642,8 @@ static void gimbal_set_control(gimbal_control_t *set_control)
   else if (set_control->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_GYRO)
   {
     //gyro模式下，陀螺仪角度控制
-    gimbal_absolute_angle_limit(&set_control->gimbal_pitch_motor, add_pitch_angle);
+    //gimbal_absolute_angle_limit(&set_control->gimbal_pitch_motor, add_pitch_angle,0);
+		gimbal_relative_angle_limit(&set_control->gimbal_pitch_motor, add_pitch_angle);
   }
   else if (set_control->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_ENCONDE)
   {
@@ -655,11 +656,11 @@ static void gimbal_set_control(gimbal_control_t *set_control)
   * @brief          云台控制模式:GIMBAL_MOTOR_GYRO，使用陀螺仪计算的欧拉角进行控制
   * @param[out]     gimbal_motor:yaw电机或者pitch电机
   */
-static void gimbal_absolute_angle_limit(gimbal_motor_t *gimbal_motor, fp32 add)
+static void gimbal_absolute_angle_limit(gimbal_motor_t *gimbal_motor, fp32 add,int type)
 {
   static fp32 bias_angle;
   static fp32 angle_set;
-  if (gimbal_motor == NULL)
+  if (gimbal_motor == NULL || type == 0)
   {
     return;
   }
@@ -741,7 +742,8 @@ static void gimbal_control_loop(gimbal_control_t *control_loop)
   }
   else if (control_loop->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_GYRO)
   {
-    gimbal_motor_absolute_angle_control(&control_loop->gimbal_pitch_motor, 1);
+    //gimbal_motor_absolute_angle_control(&control_loop->gimbal_pitch_motor, 1);
+		gimbal_motor_relative_angle_control(&control_loop->gimbal_pitch_motor, 1);
   }
   else if (control_loop->gimbal_pitch_motor.gimbal_motor_mode == GIMBAL_MOTOR_ENCONDE)
   {
@@ -755,7 +757,7 @@ static void gimbal_control_loop(gimbal_control_t *control_loop)
   */
 static void gimbal_motor_absolute_angle_control(gimbal_motor_t *gimbal_motor, int type)
 {
-  if (gimbal_motor == NULL)
+  if (gimbal_motor == NULL || type == 1)
   {
     return;
   }
