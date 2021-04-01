@@ -344,7 +344,8 @@ static void gimbal_behavour_set(gimbal_control_t *gimbal_mode_set)
     }
     else if (switch_is_mid(gimbal_mode_set->gimbal_rc_ctrl->rc.s[GIMBAL_MODE_CHANNEL]))
     {
-        gimbal_behaviour = GIMBAL_RELATIVE_ANGLE;
+        //gimbal_behaviour = GIMBAL_RELATIVE_ANGLE;
+			gimbal_behaviour = GIMBAL_ABSOLUTE_ANGLE;
     }
     else if (switch_is_up(gimbal_mode_set->gimbal_rc_ctrl->rc.s[GIMBAL_MODE_CHANNEL]))
     {
@@ -478,7 +479,7 @@ static void gimbal_cali_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal
   * @param[out]     pitch:pitch轴角度控制，为角度的增量 单位 rad
   * @param[in]      gimbal_control_set:云台数据指针
   */
-static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)
+static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)/*middle*/
 {
     if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
     {
@@ -535,7 +536,7 @@ static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control
   * @param[in]      pitch: pitch轴角度控制，为角度的增量 单位 rad
   * @param[in]      gimbal_control_set: 云台数据指针
   */
-static void gimbal_relative_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)
+static void gimbal_relative_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)/*up*/
 {
     if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
     {

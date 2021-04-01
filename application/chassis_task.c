@@ -352,7 +352,7 @@ static void chassis_set_contorl(chassis_move_t *chassis_move_control)
 
   //follow gimbal mode
   //跟随云台模式
-  if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_FOLLOW_GIMBAL_YAW)
+  if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_FOLLOW_GIMBAL_YAW)/*up*/
   {
     fp32 sin_yaw = 0.0f, cos_yaw = 0.0f;
 
@@ -366,7 +366,7 @@ static void chassis_set_contorl(chassis_move_t *chassis_move_control)
     chassis_move_control->chassis_relative_angle_set = rad_format(angle_set);
 
     //计算旋转PID角速度
-    chassis_move_control->wz_set = -PID_calc(&chassis_move_control->chassis_angle_pid, chassis_move_control->chassis_yaw_motor->relative_angle, chassis_move_control->chassis_relative_angle_set);
+    chassis_move_control->wz_set = 6.0f;//-PID_calc(&chassis_move_control->chassis_angle_pid, chassis_move_control->chassis_yaw_motor->relative_angle, chassis_move_control->chassis_relative_angle_set);
 
     //速度限幅
     chassis_move_control->vx_set = fp32_constrain(chassis_move_control->vx_set, chassis_move_control->vx_min_speed, chassis_move_control->vx_max_speed);
@@ -387,7 +387,7 @@ static void chassis_set_contorl(chassis_move_t *chassis_move_control)
     chassis_move_control->vx_set = fp32_constrain(vx_set, chassis_move_control->vx_min_speed, chassis_move_control->vx_max_speed);
     chassis_move_control->vy_set = fp32_constrain(vy_set, chassis_move_control->vy_min_speed, chassis_move_control->vy_max_speed);
   }
-  else if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_NO_FOLLOW_YAW)
+  else if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_NO_FOLLOW_YAW)/*middle*/
   {
 
     //“angle_set” 是旋转速度控制
