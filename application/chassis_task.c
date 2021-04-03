@@ -389,11 +389,30 @@ static void chassis_set_contorl(chassis_move_t *chassis_move_control)
   }
   else if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_NO_FOLLOW_YAW)/*middle*/
   {
+    
+    fp32 sin_yaw = 0.0f, cos_yaw = 0.0f;
 
+    //旋转控制底盘速度方向，保证前进方向是云台方向，有利于运动平稳
+    sin_yaw = arm_sin_f32(-chassis_move_control->chassis_yaw_motor->relative_angle);
+    cos_yaw = arm_cos_f32(-chassis_move_control->chassis_yaw_motor->relative_angle);
+    chassis_move_control->vx_set = cos_yaw * vx_set + sin_yaw * vy_set;
+    chassis_move_control->vy_set = -sin_yaw * vx_set + cos_yaw * vy_set;
+
+    //设置控制相对云台角度
+    chassis_move_control->chassis_relative_angle_set = rad_format(angle_set);
+
+    //计算旋转PID角速度
+    chassis_move_control->wz_set = 0;//-PID_calc(&chassis_move_control->chassis_angle_pid, chassis_move_control->chassis_yaw_motor->relative_angle, chassis_move_control->chassis_relative_angle_set);
+
+    //速度限幅
+    chassis_move_control->vx_set = fp32_constrain(chassis_move_control->vx_set, chassis_move_control->vx_min_speed, chassis_move_control->vx_max_speed);
+    chassis_move_control->vy_set = fp32_constrain(chassis_move_control->vy_set, chassis_move_control->vy_min_speed, chassis_move_control->vy_max_speed);
+/*
     //“angle_set” 是旋转速度控制
     chassis_move_control->wz_set = angle_set;
     chassis_move_control->vx_set = fp32_constrain(vx_set, chassis_move_control->vx_min_speed, chassis_move_control->vx_max_speed);
     chassis_move_control->vy_set = fp32_constrain(vy_set, chassis_move_control->vy_min_speed, chassis_move_control->vy_max_speed);
+    */
   }
   else if (chassis_move_control->chassis_mode == CHASSIS_VECTOR_RAW)
   {
