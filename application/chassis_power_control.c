@@ -11,7 +11,13 @@
 #include "arm_math.h"
 #include "detect_task.h"
 
-#define POWER_LIMIT 60.0f
+/*
+#define POWER_LIMIT         100.0f//80.0f
+#define WARNING_POWER       80.0f//40.0f   
+#define WARNING_POWER_BUFF  90.0f//50.0f   
+*/
+
+#define POWER_LIMIT 80.0f
 #define WARNING_POWER 40.0f
 #define WARNING_POWER_BUFF 50.0f
 
