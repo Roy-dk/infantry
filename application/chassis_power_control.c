@@ -17,13 +17,15 @@
 #define WARNING_POWER_BUFF  90.0f//50.0f   
 */
 
-#define POWER_LIMIT 80.0f
-#define WARNING_POWER 40.0f
+
+#define WARNING_POWER 80.0f
 #define WARNING_POWER_BUFF 50.0f
 
 #define NO_JUDGE_TOTAL_CURRENT_LIMIT 64000.0f //16000 * 4,
 #define BUFFER_TOTAL_CURRENT_LIMIT 16000.0f
 #define POWER_TOTAL_CURRENT_LIMIT 20000.0f
+
+
 
 /**
   * @brief          限制功率，主要限制电机电流
@@ -31,6 +33,7 @@
   */
 void chassis_power_control(chassis_move_t *chassis_power_control)
 {
+	fp32* power_limit_lp = get_power_limit_lp();
     fp32 chassis_power = 0.0f;
     fp32 chassis_power_buffer = 0.0f;
     fp32 total_current_limit = 0.0f;
@@ -76,11 +79,11 @@ void chassis_power_control(chassis_move_t *chassis_power_control)
                 fp32 power_scale;
                 //power < 80w
                 //功率小于80w
-                if (chassis_power < POWER_LIMIT)
+                if (chassis_power < *power_limit_lp)
                 {
                     //scale down
                     //缩小
-                    power_scale = (POWER_LIMIT - chassis_power) / (POWER_LIMIT - WARNING_POWER);
+                    power_scale = (*power_limit_lp - chassis_power) / (*power_limit_lp - WARNING_POWER);
                 }
                 //power > 80w
                 //功率大于80w

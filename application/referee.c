@@ -16,7 +16,7 @@ ext_supply_projectile_action_t supply_projectile_action_t;
 ext_supply_projectile_booking_t supply_projectile_booking_t;
 ext_referee_warning_t referee_warning_t;
 
-ext_game_robot_state_t robot_state;
+ext_game_robot_state_t robot_state; //状态
 ext_power_heat_data_t power_heat_data_t;
 ext_game_robot_pos_t game_robot_pos_t;
 ext_buff_musk_t buff_musk_t;
@@ -25,8 +25,14 @@ ext_robot_hurt_t robot_hurt_t;
 ext_shoot_data_t shoot_data_t;
 ext_bullet_remaining_t bullet_remaining_t;
 ext_student_interactive_data_t student_interactive_data_t;
+fp32 power_limit = 80.0f;
 
-void init_referee_struct_data(void)
+fp32* get_power_limit_lp(void)
+{
+    return &power_limit;
+}
+
+void init_referee_struct_data(void) //全部初始化为0
 {
     memset(&referee_receive_header, 0, sizeof(frame_header_struct_t));
     memset(&referee_send_header, 0, sizeof(frame_header_struct_t));
@@ -52,7 +58,7 @@ void init_referee_struct_data(void)
     memset(&student_interactive_data_t, 0, sizeof(ext_student_interactive_data_t));
 }
 
-void referee_data_solve(uint8_t *frame)
+void referee_data_solve(uint8_t *frame) //解包
 {
     uint16_t cmd_id = 0;
 
@@ -165,6 +171,11 @@ void get_chassis_power_and_buffer(fp32 *power, fp32 *buffer)
 uint8_t get_robot_id(void)
 {
     return robot_state.robot_id;
+}
+
+ext_game_robot_state_t get_robot_state(void)
+{
+    return robot_state;
 }
 
 void get_shoot_heat0_limit_and_heat0(uint16_t *heat0_limit, uint16_t *heat0)

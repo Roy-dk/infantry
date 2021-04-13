@@ -85,15 +85,15 @@
 //single chassis motor max speed
 //单个底盘电机最大速度
 //#define MAX_WHEEL_SPEED 4.0f
-#define MAX_WHEEL_SPEED 6.0f
+#define MAX_WHEEL_SPEED 10.0f
 //chassis forward or back max speed
 //底盘运动过程最大前进速度
 //#define NORMAL_MAX_CHASSIS_SPEED_X 2.0f
-#define NORMAL_MAX_CHASSIS_SPEED_X 4.0f
+#define NORMAL_MAX_CHASSIS_SPEED_X 6.0f
 //chassis left or right max speed
 //底盘运动过程最大平移速度
 //#define NORMAL_MAX_CHASSIS_SPEED_Y 1.5f
-#define NORMAL_MAX_CHASSIS_SPEED_Y 4.0f
+#define NORMAL_MAX_CHASSIS_SPEED_Y 6.0f
 
 #define CHASSIS_WZ_SET_SCALE 0.1f
 

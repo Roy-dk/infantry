@@ -479,6 +479,7 @@ static void gimbal_cali_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal
   * @param[out]     pitch:pitch轴角度控制，为角度的增量 单位 rad
   * @param[in]      gimbal_control_set:云台数据指针
   */
+ fp32 old_pitch = 0;
 static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control_t *gimbal_control_set)/*middle*/
 {
     if (yaw == NULL || pitch == NULL || gimbal_control_set == NULL)
@@ -493,6 +494,14 @@ static void gimbal_absolute_angle_control(fp32 *yaw, fp32 *pitch, gimbal_control
 
     *yaw = yaw_channel * YAW_RC_SEN - gimbal_control_set->gimbal_rc_ctrl->mouse.x * YAW_MOUSE_SEN;
     *pitch = pitch_channel * PITCH_RC_SEN + gimbal_control_set->gimbal_rc_ctrl->mouse.y * PITCH_MOUSE_SEN;
+
+
+    //增加鼠标右键pitch水平瞄准
+    if(gimbal_control_set->gimbal_rc_ctrl->mouse.press_r){
+        *pitch = old_pitch;
+    }
+    old_pitch = *pitch;
+
 
     {
         static uint16_t last_turn_keyboard = 0;

@@ -382,14 +382,19 @@ static void shoot_feedback_update(void)
 
     if (up_time > 0)
     {
-        shoot_control.fric1_ramp.max_value = FRIC_UP;
-        shoot_control.fric2_ramp.max_value = FRIC_UP;
+        //去掉右键加速,改为锁pitch轴
+        //shoot_control.fric1_ramp.max_value = FRIC_UP;
+        //shoot_control.fric2_ramp.max_value = FRIC_UP;
         up_time--;
     }
     else
     {
-        shoot_control.fric1_ramp.max_value = FRIC_DOWN;
-        shoot_control.fric2_ramp.max_value = FRIC_DOWN;
+        int16_t* speed_pwm = get_fric_speed_pwm_lp();
+        //shoot_control.fric1_ramp.max_value = FRIC_DOWN;
+        //shoot_control.fric2_ramp.max_value = FRIC_DOWN;
+        shoot_control.fric1_ramp.max_value = *speed_pwm;
+        shoot_control.fric2_ramp.max_value = *speed_pwm;
+
     }
 }
 
