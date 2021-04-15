@@ -100,7 +100,14 @@ int16_t shoot_control_loop(void)
 
     shoot_set_mode();        //设置状态机
     shoot_feedback_update(); //更新数据
-
+    uint16_t shoot_heat0,shoot_heat0_limit;
+    get_shoot_heat0_limit_and_heat0(&shoot_heat0_limit,&shoot_heat0);
+    bool_t is_heat0_overflow = false;
+    if (shoot_heat0<shoot_heat0_limit-20)
+    {
+       is_heat0_overflow = true;
+    }
+    
     if (shoot_control.shoot_mode == SHOOT_STOP)
     {
         //设置拨弹轮的速度
@@ -113,7 +120,7 @@ int16_t shoot_control_loop(void)
     }
     else if (shoot_control.shoot_mode == SHOOT_READY)//SHOOT_READY_BULLET
     {
-        if (switch_is_down(shoot_control.shoot_rc->rc.s[SHOOT_RC_MODE_CHANNEL])||shoot_control.press_l)//shoot_control.key == SWITCH_TRIGGER_OFF)
+        if ((switch_is_down(shoot_control.shoot_rc->rc.s[SHOOT_RC_MODE_CHANNEL])||shoot_control.press_l) && is_heat0_overflow == false)//shoot_control.key == SWITCH_TRIGGER_OFF)
         {
             //设置拨弹轮的拨动速度,并开启堵转反转处理
             shoot_control.trigger_speed_set = READY_TRIGGER_SPEED;//delete
