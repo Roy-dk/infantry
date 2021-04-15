@@ -455,3 +455,8 @@ static void shoot_bullet_control(void)
         shoot_control.move_flag = 0;
     }
 }
+
+
+
+
+
